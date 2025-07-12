@@ -2,6 +2,8 @@
 
 import React, { useRef, useEffect, useState } from "react";
 import * as THREE from "three";
+import { Tooltips, Links } from "../constants/GalaxyConstants";
+import { useRouter } from "next/navigation";
 
 export default function Galaxy({
   width = 400,
@@ -16,6 +18,8 @@ export default function Galaxy({
   const rendererRef = useRef<THREE.WebGLRenderer>(null);
   const cameraRef = useRef<THREE.PerspectiveCamera>(null);
   const [dimensions, setDimensions] = useState({ width, height });
+  const [tooltip, setTooltip] = useState({ show: false, text: '', x: 0, y: 0 });
+  const router = useRouter();
 
   // handle container resize safely
   useEffect(() => {
@@ -40,61 +44,122 @@ export default function Galaxy({
   }, []);
 
   useEffect(() => {
-    if (!canvasRef.current) return;
+		if (!canvasRef.current) return;
 
-    // store ref in variable to avoid cleanup issues
-    const canvas = canvasRef.current;
+		// store ref in variable to avoid cleanup issues
+		const canvas = canvasRef.current;
 
-    // scene setup
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x0e1728);
-    sceneRef.current = scene;
+		// scene setup
+		const scene = new THREE.Scene();
+		scene.background = new THREE.Color(0x0e1728);
+		sceneRef.current = scene;
 
-    // camera setup
-    const camera = new THREE.PerspectiveCamera(75, dimensions.width / dimensions.height, 0.1, 1000);
-    camera.position.set(0, 20, 50); // x, y, z
-    camera.lookAt(0, 0, 0);
-    cameraRef.current = camera;
+		// camera setup
+		const camera = new THREE.PerspectiveCamera(
+			75,
+			dimensions.width / dimensions.height,
+			0.1,
+			1000
+		);
+		camera.position.set(0, 20, 50); // x, y, z
+		camera.lookAt(0, 0, 0);
+		cameraRef.current = camera;
 
-    // renderer setup
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-    renderer.setSize(dimensions.width, dimensions.height);
-    if (typeof window !== 'undefined') {
-      renderer.setPixelRatio(window.devicePixelRatio);
-    }
-    rendererRef.current = renderer;
+		// renderer setup
+		const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+		renderer.setSize(dimensions.width, dimensions.height);
+		if (typeof window !== "undefined") {
+			renderer.setPixelRatio(window.devicePixelRatio);
+		}
+		rendererRef.current = renderer;
+		// create stars object
+		const stars = getStars();
+		stars.name = "stars";
+		scene.add(stars);
 
-    // create stars object
-    const stars = getStars();
-    scene.add(stars);
-
-    const sunGroup = new THREE.Group();
-    const sun = getSun(4);
-    const {corona, animateCorona} = getCorona(5);
-    sunGroup.add(sun);
-    sunGroup.add(corona);
+		const sunGroup = new THREE.Group();
+		sunGroup.name = "sunGroup";
+		const sun = getSun(4);
+		sun.name = "sun";
+		const { corona, animateCorona } = getCorona(5);
+		corona.name = "corona";
+		sunGroup.add(sun);
+		sunGroup.add(corona);
     scene.add(sunGroup);
+    
+    const interactableObjects = [sunGroup];
 
+		// raycaster setup
+		const raycaster = new THREE.Raycaster();
+		const mouse = new THREE.Vector2();
 
-    // animation
-    function animate() {
-      const t = performance.now() * 0.002; // performance.now() returns the number of milliseconds since the page loaded
-      animateCorona(t);
-      stars.rotation.y += 0.0001; // rotate the stars around the y-axis
-      renderer.render(scene, camera);
-    }
-    renderer.setAnimationLoop(animate); // calls animate function 60 times per second
+		function onMouseMove(event: MouseEvent) {
+			// convert mouse position to normalized device coordinates relative to canvas
+      const rect = canvas.getBoundingClientRect(); // get the bounding rectangle of the canvas
+      const x = event.clientX - rect.left; // mouse position relative to canvas
+      const y = event.clientY - rect.top; // mouse position relative to canvas
+			mouse.x = (x / rect.width) * 2 - 1; // normalized device coordinates
+			mouse.y = -(y / rect.height) * 2 + 1; // normalized device coordinates
 
-    // cleanup
-    return () => {
-      renderer.setAnimationLoop(null);
-    };
-  }, [dimensions.width, dimensions.height]);
+			raycaster.setFromCamera(mouse, camera);
+			const intersects = raycaster.intersectObjects(interactableObjects, true); // true = recursive search
+			if (intersects.length > 0) {
+        console.log("Hovering over:", intersects[0].object.name);
+        setTooltip({
+          show: true,
+          text: Tooltips[intersects[0].object.name as keyof typeof Tooltips],
+          x: x,
+          y: y
+        });
+			} else {
+				// Hide tooltip when not hovering over anything
+				setTooltip(prev => ({ ...prev, show: false }));
+			}
+		}
+
+		function handleMouseClick(event: MouseEvent) {
+			console.log("CLICK");
+			// convert mouse position to normalized device coordinates relative to canvas
+			const rect = canvas.getBoundingClientRect(); // get the bounding rectangle of the canvas
+			mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1; // mouse position relative to canvas
+			mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1; // mouse position relative to canvas
+
+			raycaster.setFromCamera(mouse, camera);
+			const intersects = raycaster.intersectObjects(interactableObjects, true); // true = recursive search
+			if (intersects.length > 0) {
+        console.log("CLICKED:", intersects[0].object.name);
+        router.push(Links[intersects[0].object.name as keyof typeof Links]);
+				// You can add click effects here
+			} else {
+				console.log("Clicked on empty space");
+			}
+		}
+
+		// add event listener for mouse move
+		renderer.domElement.addEventListener("mousemove", onMouseMove);
+		renderer.domElement.addEventListener("click", handleMouseClick);
+
+		// animation
+		function animate() {
+			const t = performance.now() * 0.002; // performance.now() returns the number of milliseconds since the page loaded
+			animateCorona(t);
+			stars.rotation.y += 0.0001; // rotate the stars around the y-axis
+			renderer.render(scene, camera);
+		}
+		renderer.setAnimationLoop(animate); // calls animate function 60 times per second
+
+		// cleanup
+		return () => {
+			renderer.setAnimationLoop(null);
+			renderer.domElement.removeEventListener("mousemove", onMouseMove);
+			renderer.domElement.removeEventListener("click", handleMouseClick);
+		};
+	}, [dimensions.width, dimensions.height]);
 
   return (
     <div 
       ref={containerRef}
-      className="w-full h-full"
+      className="w-full h-full relative"
       style={{ width: '100%', height: '100%' }}
     >
       <canvas
@@ -102,6 +167,20 @@ export default function Galaxy({
         className="w-full h-full"
         style={{ width: '100%', height: '100%' }}
       />
+      
+      {/* Tooltip */}
+      {tooltip.show && (
+        <div
+          className="absolute z-10 px-3 py-2 text-sm text-white bg-black/80 rounded-lg shadow-lg pointer-events-none"
+          style={{
+            left: tooltip.x,
+            top: tooltip.y,
+            transform: 'translate(-50%, -120%)'
+          }}
+        >
+          {tooltip.text}
+        </div>
+      )}
     </div>
   );
 }
@@ -132,6 +211,13 @@ function getCorona(radius: number = 22) {
 		side: THREE.DoubleSide,
 	});
   const corona = new THREE.Mesh(coronaGeometry, coronaMaterial);
+
+  // create a custom bounding box for the corona
+  corona.geometry.computeBoundingBox();
+  const bbox = corona.geometry.boundingBox!.clone();
+  const expandBy = bbox.getSize(new THREE.Vector3()).multiplyScalar(0.05); // 5% bigger in each direction
+  bbox.expandByVector(expandBy);
+  corona.geometry.boundingBox = bbox;
   
   const animateCorona = (t: number) => {
     for (let i = 0; i < positionAttribute.count; i++) { // iterates through all the vertices
