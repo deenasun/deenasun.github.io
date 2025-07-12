@@ -5,9 +5,18 @@
   --foreground: #171717;
 }
 
+@theme {
+  --color-space-black: #0e1728ff;
+  --color-space-blue: #1B2F65ff;
+  --color-space-light-blue: #33568Cff;
+  --color-space-orange: #B26133ff;
+  --color-space-gold: #D09A56ff;
+  --color-cream: #f1e8d7;
+}
+
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: var(--color-space-black);
+  --color-foreground: var(--color-space-gold);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -20,7 +29,7 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--color-space-black);
+  color: var(--color-cream);
   font-family: Arial, Helvetica, sans-serif;
 }
