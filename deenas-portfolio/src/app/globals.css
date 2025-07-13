@@ -33,3 +33,9 @@ body {
   color: var(--color-cream);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* indents subsequent lines of a list item */
+.indent-bullets li {
+  text-indent: -1.5em;
+  padding-left: 1.5em;
+}
