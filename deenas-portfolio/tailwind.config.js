@@ -14,6 +14,10 @@ module.exports = {
         quinary: "var(--quinary)",
         'text-primary': "var(--text-primary)",
       },
+      fontFamily: {
+        'roboto-mono': ['var(--font-roboto-mono)'],
+        'tiempos': ['var(--font-tiempos)'],
+      },
     },
   },
   plugins: [],

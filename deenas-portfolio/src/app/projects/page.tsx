@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Page from "@/components/Page";
 import { PortfolioPages } from "@/constants/PortfolioConstants";
+import Card from "@/components/Card";
 
 export const metadata: Metadata = {
 	title: "Deena's Portfolio - Projects",
@@ -8,20 +9,20 @@ export const metadata: Metadata = {
 };
 
 export default function Projects() {
+	const description = `def get_projects(self):
+	while True:
+		self.learn()
+		self.build()
+		self.launch()`;
 	return (
-		<Page image={PortfolioPages.projects.image} title="Projects" description="Learn more about my projects.">
-			<Card />
-		</Page>
-	);
-}
-
-const Card = () => {
-	return (
-		<div className="flex flex-col gap-4 bg-space-blue rounded-md p-4">
-			<h1 className="text-2xl font-bold">Coming soon</h1>
-			<p className="text-lg">
-				This page is still a work in progress. I&apos;ll be linking my projects soon!
-			</p>
+		<div className="flex flex-col w-full items-start p-8 gap-4 max-w-7xl mx-auto">
+			<Page
+				image={PortfolioPages.projects.image}
+				title="Projects"
+				description={description}
+			>
+				<Card title="Coming soon" content="This page is still a work in progress. I&apos;ll link my projects here soon!" />
+			</Page>
 		</div>
 	);
-};
+}

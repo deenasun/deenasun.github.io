@@ -1,5 +1,4 @@
 import Galaxy from "../components/Galaxy";
-import Footer from "../components/Footer";
 
 export default function Home() {
 	return (
@@ -7,7 +6,6 @@ export default function Home() {
 			<main className="flex h-full w-full max-w-screen">
 				<Galaxy />
 			</main>
-			<Footer />
 		</div>
 	);
 }

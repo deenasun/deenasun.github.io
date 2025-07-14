@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+@font-face {
+    font-family: "Tiempos Text Regular";
+    src: url("https://db.onlinewebfonts.com/t/1b3f9cb78376a36884f3908f37a42c91.eot");
+    src: url("https://db.onlinewebfonts.com/t/1b3f9cb78376a36884f3908f37a42c91.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/1b3f9cb78376a36884f3908f37a42c91.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/1b3f9cb78376a36884f3908f37a42c91.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/1b3f9cb78376a36884f3908f37a42c91.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/1b3f9cb78376a36884f3908f37a42c91.svg#Tiempos Text Regular")format("svg");
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -19,6 +29,8 @@
   --color-foreground: var(--color-space-gold);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-roboto-mono: var(--font-roboto-mono);
+  --font-tiempos: "Tiempos Text Regular", serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -31,11 +43,20 @@
 body {
   background: var(--color-space-black);
   color: var(--color-cream);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-roboto-mono), sans-serif;
+}
+
+.underline-links {
+  @apply hover:underline hover:underline-offset-4;
 }
 
 /* indents subsequent lines of a list item */
 .indent-bullets li {
   text-indent: -1.5em;
   padding-left: 1.5em;
+}
+
+/* SVG cream color filter */
+.svg-cream {
+  filter: brightness(0) saturate(100%) invert(95%) sepia(8%) saturate(600%) hue-rotate(359deg) brightness(110%) contrast(105%);
 }

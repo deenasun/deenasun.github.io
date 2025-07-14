@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Page from "@/components/Page";
 import { PortfolioPages } from "@/constants/PortfolioConstants";
+import Card from "@/components/Card";
 
 export const metadata: Metadata = {
 	title: "Deena's Portfolio - Blog",
@@ -8,18 +9,23 @@ export const metadata: Metadata = {
 };
 
 export default function Blog() {
+	const description = `def blog(self):
+	self.blogs = ["thoughts", "learnings", "stories"]
+	for blog in self.blogs:
+		self.write(blog)
+	`;
 	return (
-		<Page image={PortfolioPages.blog.image} title="Blog" description="Some of my thoughts, learnings, and stories.">
-			<Card />
-		</Page>
+		<div className="flex flex-col w-full items-start p-8 gap-4 max-w-7xl mx-auto">
+			<Page
+				image={PortfolioPages.blog.image}
+				title="Blog"
+				description={description}
+			>
+				<Card
+					title="Coming soon"
+					content="This page is still a work in progress. I'll link my blogs here as I create them!"
+				/>
+			</Page>
+		</div>
 	);
-}
-
-const Card = () => {
-    return (
-        <div className="flex flex-col gap-4 bg-space-blue rounded-md p-4">
-            <h1 className="text-2xl font-bold">Coming soon</h1>
-            <p className="text-lg">This page is still a work in progress. I&apos;ll link my blogs here as I create them!</p>
-        </div>
-    )
 }

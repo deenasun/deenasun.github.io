@@ -52,10 +52,10 @@ function initCorona(radius: number = 5) {
 	return { corona, animateCorona };
 }
 
-function initSunGroup() {
+function initSunGroup(sunRadius: number = 4, coronaRadius: number = 5) {
     const sunGroup = new THREE.Group();
-    const sunCore = initSunCore();
-    const {corona, animateCorona} = initCorona();
+    const sunCore = initSunCore(sunRadius);
+    const {corona, animateCorona} = initCorona(coronaRadius);
 	sunGroup.add(sunCore);
 	sunGroup.add(corona);
     sunGroup.name = "sunGroup";
@@ -181,7 +181,7 @@ function initPlanet(
 	return { planetGroup, animatePlanet };
 }
 
-function getPlanets() {
+function getPlanets(scaleRadius: number = 1) {
 	const planets = [];
 	for (const page in PortfolioPageToPlanet) {
 		const planetDetails =
@@ -190,7 +190,7 @@ function getPlanets() {
 		// create a planet with params: name, radius, color, texturePath, hasRings, rotationSpeed, rotatesClockwise, angularVelocity, orbitRadius, axisTilt
 		const { planetGroup, animatePlanet } = initPlanet(
 			page,
-			planetDetails.radius,
+			planetDetails.radius * scaleRadius,
 			planetDetails.color,
 			planetDetails.texturePath,
 			planetDetails.hasRings,
@@ -198,7 +198,7 @@ function getPlanets() {
 			planetDetails.rotationSpeed,
 			planetDetails.rotatesClockwise,
 			planetDetails.angularVelocity,
-			planetDetails.orbitRadius,
+			planetDetails.orbitRadius * scaleRadius,
 			planetDetails.axisTilt
 		);
 		planets.push({ planetGroup, animatePlanet });

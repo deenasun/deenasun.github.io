@@ -2,11 +2,11 @@
 
 import React, { useRef, useEffect, useState } from "react";
 import * as THREE from "three";
-import { PortfolioPages } from "../constants/PortfolioConstants";
+import { PortfolioPages } from "@/constants/PortfolioConstants";
 import { useRouter } from "next/navigation";
-import Tooltip from "./Tooltip";
-import { initSunGroup, initStars, getPlanets } from "./SpaceObjects";
-import Image from "next/image";
+import Tooltip from "@/components/Tooltip";
+import { initSunGroup, initStars, getPlanets } from "@/components/SpaceObjects";
+import Overlay from "@/components/Overlay";
 
 export default function Galaxy({
 	width = 400,
@@ -21,7 +21,14 @@ export default function Galaxy({
 	const rendererRef = useRef<THREE.WebGLRenderer>(null);
 	const cameraRef = useRef<THREE.PerspectiveCamera>(null);
 	const [dimensions, setDimensions] = useState({ width, height });
-	const [tooltip, setTooltip] = useState({ show: false, tooltipKey: "", x: 0, y: 0 });
+	const isMobileRef = useRef(false); // for 3D scene
+	const [isMobile, setIsMobile] = useState(false); // for UI overlay re-renders
+	const [tooltip, setTooltip] = useState({
+		show: false,
+		tooltipKey: "",
+		x: 0,
+		y: 0,
+	});
 	const router = useRouter();
 
 	// handle container resize safely
@@ -46,6 +53,13 @@ export default function Galaxy({
 		return () => window.removeEventListener("resize", updateDimensions);
 	}, []);
 
+	// determine if we're on mobile based on container width
+	useEffect(() => {
+		const mobile = dimensions.width < 768;
+		isMobileRef.current = mobile; // for 3D scene
+		setIsMobile(mobile); // for UI overlay re-renders
+	}, [dimensions.width]);
+
 	useEffect(() => {
 		if (!canvasRef.current) return;
 
@@ -64,7 +78,8 @@ export default function Galaxy({
 			0.1,
 			1000
 		);
-		camera.position.set(0, 20, 50); // x, y, z
+
+		camera.position.set(0, 20, 50);
 		camera.lookAt(0, 0, 0);
 		cameraRef.current = camera;
 
@@ -80,11 +95,14 @@ export default function Galaxy({
 		stars.name = "stars";
 		scene.add(stars);
 
-		const {sunGroup, animateCorona} = initSunGroup();
+		// create sun group with appropriate size for mobile/desktop
+		const { sunGroup, animateCorona } = isMobileRef.current 
+			? initSunGroup(2, 2.5) 
+			: initSunGroup(4, 5);
 		scene.add(sunGroup);
 
 		// create all the planets
-		const planets = getPlanets();
+		const planets = getPlanets(isMobileRef.current ? 0.5 : 1);
 		const interactableObjects: THREE.Object3D[] = [];
 		for (const planet of planets) {
 			scene.add(planet.planetGroup);
@@ -131,7 +149,9 @@ export default function Galaxy({
 			if (intersects.length > 0) {
 				console.log("CLICKED:", intersects[0].object.name);
 				router.push(
-					PortfolioPages[intersects[0].object.name as keyof typeof PortfolioPages]?.path || "/"
+					PortfolioPages[
+						intersects[0].object.name as keyof typeof PortfolioPages
+					]?.path || "/"
 				);
 				// You can add click effects here
 			} else {
@@ -170,26 +190,7 @@ export default function Galaxy({
 			style={{ width: "100%", height: "100%" }}
 		>
 			{/* UI Overlay */}
-			<div className="absolute top-4 left-4 text-cream z-10">
-				<p className="opacity-80 bg-clip-text text-transparent bg-gradient-to-r from-space-blue to-space-blue">
-					Explore my portfolio&apos;s universe!
-				</p>
-				<div className="font-mono flex flex-col">
-					{Object.values(PortfolioPages).map((page) => {
-						switch (page.name) {
-							case "home":
-								return null;
-							default:
-								return (
-									<p key={page.path} className="mx-2 flex items-center text-cream">
-										<Image src={page.image} alt={page.name} width={20} height={20} className="inline-block mr-2 align-middle" />
-										{page.name}
-									</p>
-								);
-						}
-					})}
-				</div>
-			</div>
+			<Overlay isMobile={isMobile} />
 			<canvas
 				ref={canvasRef}
 				className="w-full h-full"
