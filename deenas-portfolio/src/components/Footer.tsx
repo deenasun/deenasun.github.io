@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Footer() {
 	return (
-		<footer className="w-full border-t-2 border-cream flex p-4 gap-[24px] flex-wrap items-center justify-center mt-auto">
+		<footer className="w-full flex flex-wrap items-center justify-center gap-4 p-4 mt-auto bg-space-black border-t-2 border-cream">
 			<a
 				className="flex items-center gap-2 underline-links"
 				href="https://github.com/deenasun"

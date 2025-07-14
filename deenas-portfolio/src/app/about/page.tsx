@@ -20,7 +20,8 @@ export default function About() {
 					<p>
 						Hi, I&apos;m Deena, a rising junior at UC Berkeley studying
 						Electrical Engineering and Computer Science and Business
-						Administration under the Management, Entrepreneurship, and Technology (M.E.T.) Program!
+						Administration under the Management, Entrepreneurship, and
+						Technology (M.E.T.) Program!
 					</p>
 
 					<p>Here&apos;s what I&apos;ve been up to recently:</p>
@@ -38,7 +39,10 @@ export default function About() {
 							This summer, I&apos;m interning at Uber as a software and GenAI
 							engineer on the AI Solutions team.
 						</li>
-						<li>In Fall 2025, I&apos;ll be part of CS 189/289 (Introduction to Machine Learning) course staff.</li>
+						<li>
+							In Fall 2025, I&apos;ll be part of CS 189/289 (Introduction to
+							Machine Learning) course staff.
+						</li>
 					</ul>
 
 					<p>
