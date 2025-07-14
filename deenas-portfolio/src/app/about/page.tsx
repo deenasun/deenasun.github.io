@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Page from "@/components/Page";
+import Card from "@/components/Card";
 
 export const metadata: Metadata = {
 	title: "Deena's Portfolio - About",
@@ -13,17 +14,13 @@ export default function About() {
     self.graduation_year = 2027
     self.majors = ["Electrical Engineering and Computer Science", "Business Administration"]
     self.school = "University of California, Berkeley"`;
+
+	const intro =
+		"Hello, I'm Deena, a rising junior at UC Berkeley studying Electrical Engineering and Computer Science and Business Administration under the Management, Entrepreneurship, and Technology (M.E.T.) Program.";
 	return (
 		<div className="flex flex-col w-full items-start p-8 gap-4 max-w-7xl mx-auto">
 			<Page image="/me.png" title="About" description={description}>
-				<div className="flex flex-col gap-4 bg-space-blue rounded-md p-4">
-					<p>
-						Hi, I&apos;m Deena, a rising junior at UC Berkeley studying
-						Electrical Engineering and Computer Science and Business
-						Administration under the Management, Entrepreneurship, and
-						Technology (M.E.T.) Program!
-					</p>
-
+				<Card content={intro}>
 					<p>Here&apos;s what I&apos;ve been up to recently:</p>
 					<ul className="indent-bullets list-disc list-inside max-w-5xl space-y-2">
 						<li>
@@ -56,7 +53,7 @@ export default function About() {
 						Thanks for visiting my portfolio! I look forward to sharing more of
 						my moonshots with you!
 					</p>
-				</div>
+				</Card>
 			</Page>
 		</div>
 	);
