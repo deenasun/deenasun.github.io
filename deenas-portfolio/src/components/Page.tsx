@@ -29,7 +29,7 @@ export default function Page({
 					<h1 className="text-3xl font-bold text-cream text-center md:text-left font-tiempos">
 						{title}
 				  </h1>
-				  <pre className="text-cream leading-relaxed text-center md:text-left">
+				  <pre className="text-cream leading-relaxed text-center whitespace-pre-wrap max-w-xs md:max-w-none md:text-left">
 					  {description}
 					</pre>
 				</div>
