@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import Page from "@/components/Page";
+import Introduction from "@/components/Introduction";
 import { PortfolioPages } from "@/constants/PortfolioConstants";
 import Card from "@/components/Card";
 
@@ -16,7 +16,7 @@ export default function Blog() {
 	`;
 	return (
 		<div className="flex flex-col w-full items-start p-8 gap-4 max-w-7xl mx-auto">
-			<Page
+			<Introduction
 				image={PortfolioPages.blog.image}
 				title="Blog"
 				description={description}
@@ -25,7 +25,7 @@ export default function Blog() {
 					title="Coming soon"
 					content="This page is still a work in progress. I'll link my blogs here as I create them!"
 				/>
-			</Page>
+			</Introduction>
 		</div>
 	);
 }

@@ -1,6 +1,7 @@
 import { Metadata } from "next";
-import Page from "@/components/Page";
+import Introduction from "@/components/Introduction";
 import Card from "@/components/Card";
+import Information from "@/data/Information.json";
 
 export const metadata: Metadata = {
 	title: "Deena's Portfolio - About",
@@ -17,44 +18,49 @@ export default function About() {
 
 	const intro =
 		"Hello, I'm Deena, a rising junior at UC Berkeley studying Electrical Engineering and Computer Science and Business Administration under the Management, Entrepreneurship, and Technology (M.E.T.) Program.";
+
+	const current = Information["What I'm currently up to..."];
+	const experience = Information["Experience"];
+
 	return (
 		<div className="flex flex-col w-full items-start p-8 gap-4 max-w-7xl mx-auto">
-			<Page image="/me.png" title="About" description={description}>
-				<Card content={intro}>
-					<p>Here&apos;s what I&apos;ve been up to recently:</p>
-					<ul className="indent-bullets list-disc list-inside max-w-5xl space-y-2">
-						<li>
-							I&apos;m a member of Machine Learning @ Berkeley, UC
-							Berkeley&apos;s premier machine learning organization.
-						</li>
-						<li>
-							I&apos;m also a research assistant at Stanford AI Laboratory and
-							Berkeley AI Research, where I&apos;m investigating how frontier AI
-							agents will shape the future of cybersecurity.
-						</li>
-						<li>
-							This summer, I&apos;m interning at Uber as a software and GenAI
-							engineer on the AI Solutions team.
-						</li>
-						<li>
-							In Fall 2025, I&apos;ll be part of CS 189/289 (Introduction to
-							Machine Learning) course staff.
-						</li>
-					</ul>
-
+			<Introduction image="/me.png" title="About" description={description}>
+				<Card content={intro} width="w-full">
 					<p>
-						My current passions are agentic AI, computer vision, and
-						astronautics. <br />
-						In my free time, I like to play jazz piano, rock climb, and visit
-						art museums. I love dinosaurs and space!
+						I&apos;m passionate about agentic AI, computer vision, and
+						astronautics.
 					</p>
-
 					<p>
-						Thanks for visiting my portfolio! I look forward to sharing more of
+						In my free time, I like to play jazz piano, rock climb, and visit
+						art museums. I love dinosaurs, space, and books by Ernest
+						Hemingway and Kurt Vonnegut!
+					</p>
+					<p>
+						Thanks for visiting my portfolio. I look forward to sharing more of
 						my moonshots with you!
 					</p>
 				</Card>
-			</Page>
+
+				<Card title={"What I'm currently up to..."} width="w-full">
+					<ul className="indent-bullets list-disc list-inside max-w-5xl space-y-2">
+						{current.map((item) => (
+							<li key={item.title}>
+								<b>{item.title}</b>: {item.description}
+							</li>
+						))}
+					</ul>
+				</Card>
+
+				<Card title={"Experience"} width="w-full">
+					<ul className="indent-bullets list-disc list-inside max-w-5xl space-y-2">
+						{experience.map((item) => (
+							<li key={item.title}>
+								<b>{item.title}</b>: {item.description}
+							</li>
+						))}
+					</ul>
+				</Card>
+			</Introduction>
 		</div>
 	);
 }

@@ -1,7 +1,8 @@
 import { Metadata } from "next";
-import Page from "@/components/Page";
+import Introduction from "@/components/Introduction";
 import { PortfolioPages } from "@/constants/PortfolioConstants";
-import Card from "@/components/Card";
+import LinkCard from "@/components/LinkCard";
+import Information from "@/data/Information.json";
 
 export const metadata: Metadata = {
 	title: "Deena's Portfolio - Projects",
@@ -14,15 +15,26 @@ export default function Projects() {
 		self.learn()
 		self.build()
 		self.launch()`;
+	
+	const projects = Information["Projects"];
 	return (
 		<div className="flex flex-col w-full items-start p-8 gap-4 max-w-7xl mx-auto">
-			<Page
+			<Introduction
 				image={PortfolioPages.projects.image}
 				title="Projects"
 				description={description}
 			>
-				<Card title="Coming soon" content="This page is still a work in progress. I&apos;ll link my projects here soon!" />
-			</Page>
+				{projects.map((project) => (
+					<LinkCard
+						key={project.title}
+						title={project.title}
+						content={project.description}
+						link={project.link}
+						image={project.image}
+						github={project.github}
+					/>
+				))}
+			</Introduction>
 		</div>
 	);
 }

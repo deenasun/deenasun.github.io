@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import Page from "@/components/Page";
+import Introduction from "@/components/Introduction";
 import { PortfolioPages } from "@/constants/PortfolioConstants";
 
 export const metadata: Metadata = {
@@ -12,7 +12,7 @@ export default function Contact() {
 	print("Hello world!")`;
 	return (
 		<div className="flex flex-col w-full items-start p-8 gap-4 max-w-7xl mx-auto">
-			<Page
+			<Introduction
 				image={PortfolioPages.contact.image}
 				title="Contact"
 				description={description}
