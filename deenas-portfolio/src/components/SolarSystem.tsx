@@ -4,7 +4,7 @@ import React, { useRef, useEffect, useState } from "react";
 import * as THREE from "three";
 import { PortfolioPages } from "@/constants/PortfolioConstants";
 import { useRouter } from "next/navigation";
-import Tooltip from "@/components/Tooltip";
+import GalaxyTooltip from "@/components/GalaxyTooltip";
 import { initSunGroup, getPlanets } from "@/components/SpaceObjects";
 import Overlay from "@/components/Overlay";
 
@@ -121,6 +121,7 @@ export default function SolarSystem({
 			const intersects = raycaster.intersectObjects(interactableObjects, true); // true = recursive search
 			if (intersects.length > 0) {
 				console.log("Hovering over:", intersects[0].object.name);
+				canvas.style.cursor = 'pointer';
 				setTooltip({
 					show: true,
 					tooltipKey: intersects[0].object.name,
@@ -128,7 +129,8 @@ export default function SolarSystem({
 					y: y,
 				});
 			} else {
-				// Hide tooltip when not hovering over anything
+				// hide tooltip when not hovering over anything
+				canvas.style.cursor = 'default';
 				setTooltip((prev) => ({ ...prev, show: false }));
 			}
 		}
@@ -194,7 +196,7 @@ export default function SolarSystem({
 
 			{/* Tooltip */}
 			{tooltip.show && (
-				<Tooltip tooltipKey={tooltip.tooltipKey} x={tooltip.x} y={tooltip.y} />
+				<GalaxyTooltip tooltipKey={tooltip.tooltipKey} x={tooltip.x} y={tooltip.y} />
 			)}
 		</div>
 	);

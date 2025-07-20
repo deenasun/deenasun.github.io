@@ -42,6 +42,18 @@ body {
   background: var(--color-space-black);
   color: var(--color-cream);
   font-family: var(--font-roboto-mono), sans-serif;
+  font-size: 1rem; /* Default font size for desktop */
+}
+
+/* Mobile font size */
+@media (max-width: 768px) {
+  body {
+    font-size: 0.8rem; /* Smaller font size for mobile */
+  }
+  
+  h1 {
+    font-size: 1rem; /* Smaller headers on mobile */
+  }
 }
 
 .underline-links {

@@ -18,9 +18,7 @@ export default function Overlay({ isMobile }: OverlayProps) {
 					isMobile ? "text-sm" : "text-base"
 				}`}
 			>
-				{isMobile
-					? "Explore my portfolio's universe!"
-					: "Here's a map to explore my portfolio's universe!"}
+				Click on the orbiting planets to explore my portfolio&apos;s universe!
 			</p>
 			<div
 				className={`flex w-fit mt-2 ${

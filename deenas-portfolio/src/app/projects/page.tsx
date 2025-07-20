@@ -2,7 +2,15 @@ import { Metadata } from "next";
 import Introduction from "@/components/Introduction";
 import { PortfolioPages } from "@/constants/PortfolioConstants";
 import LinkCard from "@/components/LinkCard";
-import Information from "@/data/Information.json";
+import { ProjectInfo } from "@/constants/PortfolioConstants";
+
+interface Project {
+	title: string;
+	description: string;
+	link: string;
+	image: string;
+	github: string;
+}
 
 export const metadata: Metadata = {
 	title: "Deena's Portfolio - Projects",
@@ -16,7 +24,8 @@ export default function Projects() {
 		self.build()
 		self.launch()`;
 	
-	const projects = Information["Projects"];
+	const projects = ProjectInfo;
+	
 	return (
 		<div className="flex flex-col w-full items-start p-8 gap-4 max-w-7xl mx-auto">
 			<Introduction
@@ -24,7 +33,7 @@ export default function Projects() {
 				title="Projects"
 				description={description}
 			>
-				{projects.map((project) => (
+				{projects.map((project: Project) => (
 					<LinkCard
 						key={project.title}
 						title={project.title}
