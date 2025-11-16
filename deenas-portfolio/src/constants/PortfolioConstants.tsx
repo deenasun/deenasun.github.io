@@ -145,25 +145,26 @@ export const PortfolioImages = [
 
 export const CurrentAdventures = [
 	{
-		title: "Machine Learning @ Berkeley Research and External Officer",
+		title:
+			"Researcher at Berkeley AI Research",
 		description:
-			"planning hackathons, career fairs, workshops, and more with Machine Learning @ Berkeley, UC Berkeley's premier machine learning organization",
+			"diving into mechanistic interpretability to measure, analyze, and steer ambiguity in LLMs",
 	},
 	{
 		title:
-			"Research Assistant at Stanford AI Laboratory and Berkeley AI Research",
+			"Researcher at Stanford AI Laboratory",
 		description:
-			"investigating how frontier AI agents will shape the future of cybersecurity under the guidance of Professor Dawn Song",
-	},
-	{
-		title: "Uber SWE Intern",
-		description:
-			"building GenAI tools and backend infrastructure for the AI Solutions team",
+			"investigating how frontier AI will shape the future of cybersecurity",
 	},
 	{
 		title: "CS 189/289 Teaching Assistant",
 		description:
-			"teaching CS 189/289 (Introduction to Machine Learning) in Fall 2025",
+			"teaching CS 189/289 (Introduction to Machine Learning) at Berkeley on the content, discussion, and exam teams",
+	},
+	{
+		title: "Machine Learning @ Berkeley Research and External Officer",
+		description:
+			"planning hackathons, career fairs, workshops, and more with Machine Learning @ Berkeley, UC Berkeley's premier machine learning organization",
 	},
 	{
 		title: "Accel Scholar",
@@ -173,6 +174,11 @@ export const CurrentAdventures = [
 ];
 
 export const Experience = [
+	{
+		title: "Uber AI Solutions Software Engineering Intern",
+		description:
+			"launched a contextual search engine leveraging CLIP image-text models, KNN algorithms, and vector databases that let clients search over 100k+ images using natural language",
+	},
 	{
 		title: "VectorShift Software Engineering Intern",
 		description:

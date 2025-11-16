@@ -29,7 +29,7 @@ export default function About() {
 				<Gallery width="100%" />
 				<Card content={intro}>
 					<p>
-						I&apos;m passionate about agentic AI, computer vision, and
+						I&apos;m passionate about AI interpretability, reinforcement learning, computer vision, and
 						astronautics.
 					</p>
 					<p>
@@ -46,7 +46,7 @@ export default function About() {
 					<ul className="indent-bullets list-disc list-inside max-w-5xl space-y-2">
 						{current.map((item) => (
 							<li key={item.title}>
-								<b>{item.title}</b>: {item.description}
+								<b>{item.title}:</b> {item.description}
 							</li>
 						))}
 					</ul>
@@ -56,7 +56,7 @@ export default function About() {
 					<ul className="indent-bullets list-disc list-inside max-w-5xl space-y-2">
 						{experience.map((item) => (
 							<li key={item.title}>
-								<b>{item.title}</b>: {item.description}
+								<b>{item.title}:</b> {item.description}
 							</li>
 						))}
 					</ul>
