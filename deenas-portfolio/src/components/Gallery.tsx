@@ -47,7 +47,7 @@ export default function Gallery({
 						alt={image.description}
 						width={200}
 						height={200}
-						className="rounded-md flex-shrink-0 object-cover w-auto h-[150px] sm:h-[200px] transition-opacity"
+						className="rounded-md flex-shrink-0 object-cover h-[150px] sm:h-[200px] transition-opacity"
 						onMouseEnter={() => handleMouseEnter(image.src)}
 						onMouseLeave={handleMouseLeave}
 						onMouseMove={handleMouseMove}

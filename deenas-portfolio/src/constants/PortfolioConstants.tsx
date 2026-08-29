@@ -96,20 +96,32 @@ export const PortfolioPageToPlanet = {
 
 export const PortfolioImages = [
 	{
+		src: "/gallery/mlab.jpeg",
+		description: "Tabling for my club Machine Learning @ Berkeley during the first week of senior year",
+	},
+	{
+		src: "/gallery/heilan_coo.jpeg",
+		description: "\"Petting\" highland cows in Scotland during my semester abroad in Europe"
+	},
+	{
+		src: "/gallery/olympics.jpeg",
+		description: "One of the highlights of my study abroad was getting to watch an ice hockey game at the 2026 Milano-Cortina Winter Olympics with my friends!"
+	},
+	{
+		src: "/gallery/switzerland.jpeg",
+		description: "I believe in sidequesting as much as possible, and got to do a lot of it while studying abroad! This is me hiking on a glass floor thrill walk in the Swiss Alps..."
+	},
+	{
+		src: "/gallery/kayak_cesky_krumlov.jpeg",
+		description: "... and this is me kayaking in the Czech Republic next to a castle built in the 13th century"
+	},
+	{
+		src: "/gallery/oski.jpeg",
+		description: "Me and Oski! Go Bears!",
+	},
+	{
 		src: "/gallery/hackathon.jpeg",
 		description: "Me and my team at the 2025 Berkeley AI Hackathon",
-	},
-	{
-		src: "/gallery/umbrella.jpeg",
-		description: "Staying dry in the rain",
-	},
-	{
-		src: "/gallery/blackstone.jpeg",
-		description: "Touring the NYC Blackstone office with M.E.T.!",
-	},
-	{
-		src: "/gallery/moma.jpeg",
-		description: "Visiting MOMA during an M.E.T. class capstone trip to NYC",
 	},
 	{
 		src: "/gallery/arc_de_triomphe.jpeg",
@@ -126,35 +138,21 @@ export const PortfolioImages = [
 	},
 	{
 		src: "/gallery/penguin.jpeg",
-		description: "Posing with my penguin buddy at the Central Park Zoo",
+		description: "Posing with my penguin buddy at the New York City Central Park Zoo",
 	},
 	{
 		src: "/gallery/endeavour.jpeg",
 		description:
 			"Seeing the Endeavour space shuttle at the California Science Center",
 	},
-	{
-		src: "/gallery/oski.jpeg",
-		description: "Me and Oski! Go Bears!",
-	},
-	{
-		src: "/gallery/chem_lab.jpeg",
-		description: "Safety first",
-	},
 ];
 
 export const CurrentAdventures = [
 	{
 		title:
-			"Researcher at Berkeley AI Research",
+			"AI Engineer at Hex",
 		description:
-			"diving into mechanistic interpretability to measure, analyze, and steer ambiguity in LLMs",
-	},
-	{
-		title:
-			"Researcher at Stanford AI Laboratory",
-		description:
-			"investigating how frontier AI will shape the future of cybersecurity",
+			"making magic as Hex's first intern! I worked on recursively improving agents, online evals, Hex's agent harness, and training signal classifiers",
 	},
 	{
 		title: "CS 189/289 Teaching Assistant",
@@ -169,11 +167,24 @@ export const CurrentAdventures = [
 	{
 		title: "Accel Scholar",
 		description:
-			"exploring the startup and venture capital ecosystem alongside a small, tight-knit community of fellow scholars and mentors",
+			"exploring the startup and broader tech world alongside a small, tight-knit community of fellow scholars and mentors",
 	},
 ];
 
 export const Experience = [
+
+	{
+		title:
+			"Researcher at Berkeley AI Research",
+		description:
+			"produced mechanistic interpretability research to measure, analyze, and steer ambiguity in LLMs",
+	},
+	{
+		title:
+			"Researcher at Stanford AI Laboratory",
+		description:
+			"engineered RL environments to study how frontier AI will shape the future of cybersecurity",
+	},
 	{
 		title: "Uber AI Solutions Software Engineering Intern",
 		description:

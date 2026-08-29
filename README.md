@@ -2,7 +2,7 @@
 ```
 def __init__(self):
     self.name = "Deena Sun"
-    self.grade = "Junior"
+    self.grade = "Senior"
     self.graduation_year = 2027
     self.majors = ["Electrical Engineering and Computer Science", "Business Administration"]
     self.school = "University of California, Berkeley"
@@ -15,4 +15,4 @@ To create the space scenes, I used the Three.js library.
 
 My portfolio is currently deployed on GitHub Pages and accessible at [https://deenasun.github.io/](https://deenasun.github.io/).
 
-I hope you like exploring it! If you have any questions, comments, or suggestions, please reach out to me at deenasun \[at\] berkeley \[dot\] edu–--I'd love to hear from you!
+I hope you like exploring it! If you have any questions, comments, or suggestions, please reach out to me at deenasun \[at\] berkeley \[dot\] edu — I'd love to hear from you!

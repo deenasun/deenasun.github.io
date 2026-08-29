@@ -12,13 +12,13 @@ export const metadata: Metadata = {
 export default function About() {
 	const description = `def __init__(self):
     self.name = "Deena Sun"
-    self.grade = "Junior"
+    self.grade = "Senior"
     self.graduation_year = 2027
     self.majors = ["Electrical Engineering and Computer Science", "Business Administration"]
     self.school = "University of California, Berkeley"`;
 
 	const intro =
-		"Hello, I'm Deena, a rising junior at UC Berkeley studying Electrical Engineering and Computer Science and Business Administration under the Management, Entrepreneurship, and Technology (M.E.T.) Program.";
+		"Hello, I'm Deena, a 4th year undergrad at UC Berkeley studying Electrical Engineering and Computer Science and Business Administration under the Management, Entrepreneurship, and Technology (M.E.T.) Program.";
 
 	const current = CurrentAdventures;
 	const experience = Experience;
@@ -29,13 +29,13 @@ export default function About() {
 				<Gallery width="100%" />
 				<Card content={intro}>
 					<p>
-						I&apos;m passionate about AI interpretability, reinforcement learning, computer vision, and
-						astronautics.
+						I&apos;m passionate about AI interpretability, world models,
+						and the connection between AI, human psychology, and neuroscience.
 					</p>
 					<p>
-						In my free time, I like to play jazz piano, rock climb, and visit
-						art museums. I love dinosaurs, space, and books by Ernest Hemingway
-						and Kurt Vonnegut!
+						In my free time, I like to explore new hobbies (most recently, billiards and poker),
+						plan my next backpacking trip (hopefully the Camino de Santiago, Dolomites, or Peru soon),
+						and read. I love dinosaurs and space!
 					</p>
 					<p>
 						Thanks for visiting my portfolio. I look forward to sharing more of

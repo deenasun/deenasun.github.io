@@ -69,7 +69,7 @@ export default function LinkCard({
 					alt={title}
 					width={200}
 					height={200}
-					className="rounded-md flex-shrink-0 object-cover w-auto h-[150px] sm:h-[200px] hidden md:block"
+					className="rounded-md flex-shrink-0 object-cover h-[150px] sm:h-[200px] hidden md:block"
 				/>
 			)}
 		</div>
