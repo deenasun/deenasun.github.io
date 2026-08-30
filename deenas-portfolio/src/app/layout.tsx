@@ -27,9 +27,9 @@ export default function RootLayout({
       >
         <Navbar />
         <Galaxy />
-        <main>
+        <main className="flex min-h-0 flex-1 flex-col">
           {children}
-          </main>
+        </main>
         <Footer />
       </body>
     </html>

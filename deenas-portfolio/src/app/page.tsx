@@ -8,10 +8,8 @@ export const metadata: Metadata = {
 
 export default function Home() {
 	return (
-		<div className="grid grid-rows-[1fr] items-center justify-items-center min-h-screen">
-			<main className="flex h-full w-full max-w-screen">
+				<div className="flex overflow-hidden h-[calc(100dvh-8rem)] w-full max-w-screen">
 				<SolarSystem />
-			</main>
-		</div>
+			</div>
 	);
 }

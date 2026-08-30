@@ -15,6 +15,7 @@ export default function Footer() {
 					alt="GitHub icon"
 					width={16}
 					height={16}
+					style={{ width: "16px", height: "auto" }}
 					className="svg-cream"
 				/>
 				GitHub
@@ -30,8 +31,9 @@ export default function Footer() {
 					aria-hidden
 					src="/linkedin.svg"
 					alt="LinkedIn icon"
-					width={16}
-					height={16}
+					width={840}
+					height={779}
+					style={{ width: "16px", height: "auto" }}
 					className="svg-cream"
 				/>
 				LinkedIn

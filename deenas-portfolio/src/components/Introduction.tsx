@@ -13,7 +13,7 @@ export default function Introduction({
 	children?: ReactNode;
 }) {
 	return (
-		<main className="flex flex-col w-full items-start p-8 gap-4 max-w-7xl mx-auto">
+		<div className="flex flex-col w-full items-start p-8 gap-4 max-w-7xl mx-auto">
 			{/* on small devices, the title and description go below the image */}
 			<div className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-8 p-2 mx-auto w-full h-full">
 				<div className="flex-shrink-0 flex items-center justify-center md:items-start md:justify-start">
@@ -22,7 +22,8 @@ export default function Introduction({
 						alt={title}
 						width={200}
 						height={200}
-						className="rounded-lg object-cover"
+						loading="eager"
+						className="rounded-lg object-cover h-[150px] sm:h-[200px]"
 					/>
 				</div>
 				<div className="flex flex-col py-4 gap-4 h-full items-center justify-center md:items-start md:justify-start">
@@ -35,6 +36,6 @@ export default function Introduction({
 				</div>
 			</div>
 			{children}
-		</main>
+		</div>
 	);
 }
