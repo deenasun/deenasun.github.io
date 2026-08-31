@@ -1,20 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { PortfolioPages } from "@/constants/PortfolioConstants";
 
 export default function Navbar() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
-	const [mounted, setMounted] = useState(false);
 	const pathname = usePathname();
-
-	useEffect(() => {
-		// for client-side consistency: after component mounts, set mounted to true
-		// and use pathnames to render active status on navbar
-		setMounted(true);
-	}, []);
 
 	const toggleMenu = () => {
 		setIsMenuOpen(!isMenuOpen);
@@ -25,14 +18,7 @@ export default function Navbar() {
 			{/* Keep my name and mobile menu button at the top of the page in both desktop + mobile */}
 			<div className="flex flex-1 justify-between items-center h-16">
 				<div className="flex-shrink-0">
-					{!mounted ? (
-						<Link
-							href="/"
-							className="text-xl font-roboto-mono font-bold text-gray-900 hover:text-gray-700 transition-colors"
-						>
-							Deena Sun
-						</Link>
-					) : pathname === "/" ? (
+					{pathname === "/" ? (
 						<p className="text-xl font-bold text-gray-900 cursor-default">
 							Deena Sun
 						</p>
@@ -48,17 +34,7 @@ export default function Navbar() {
 
 				{/* Desktop navigation for different pages */}
 				<div className="hidden md:flex items-center justify-end gap-x-8 ml-auto">
-					{!mounted
-						? Object.values(PortfolioPages).map((page) => (
-							<Link
-								href={page.path}
-								key={page.name}
-								className={`text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors`}
-							>
-								{page.name}
-							</Link>
-						))
-						: Object.values(PortfolioPages).map((page) =>
+					{Object.values(PortfolioPages).map((page) =>
 							pathname === page.path ? (
 								<p
 									key={page.name}
@@ -114,17 +90,7 @@ export default function Navbar() {
 			{/* Mobile Navigation, hidden on medium and larger screens */}
 			{isMenuOpen && (
 				<div className="md:hidden px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-200">
-						{!mounted
-							? Object.values(PortfolioPages).map((page) => (
-								<Link
-									href={page.path}
-									key={page.name}
-									className="text-gray-700 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium transition-colors"
-								>
-									{page.name}
-								</Link>
-							))
-							: Object.values(PortfolioPages).map((page) =>
+						{Object.values(PortfolioPages).map((page) =>
 								pathname === page.path ? (
 									<p
 										key={page.name}

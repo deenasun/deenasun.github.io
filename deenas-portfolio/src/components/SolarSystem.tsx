@@ -21,8 +21,7 @@ export default function SolarSystem({
 	const rendererRef = useRef<THREE.WebGLRenderer>(null);
 	const cameraRef = useRef<THREE.PerspectiveCamera>(null);
 	const [dimensions, setDimensions] = useState({ width, height });
-	const isMobileRef = useRef(false); // for 3D scene
-	const [isMobile, setIsMobile] = useState(false); // for UI overlay re-renders
+	const isMobile = dimensions.width < 768;
 	const [tooltip, setTooltip] = useState({
 		show: false,
 		tooltipKey: "",
@@ -52,13 +51,6 @@ export default function SolarSystem({
 		// cleanup
 		return () => window.removeEventListener("resize", updateDimensions);
 	}, []);
-
-	// determine if we're on mobile based on container width
-	useEffect(() => {
-		const mobile = dimensions.width < 768;
-		isMobileRef.current = mobile; // for 3D scene
-		setIsMobile(mobile); // for UI overlay re-renders
-	}, [dimensions.width]);
 
 	useEffect(() => {
 		if (!canvasRef.current) return;
@@ -92,13 +84,13 @@ export default function SolarSystem({
 		rendererRef.current = renderer;
 
 		// create sun group with appropriate size for mobile/desktop
-		const { sunGroup, animateCorona } = isMobileRef.current 
+		const { sunGroup, animateCorona } = isMobile
 			? initSunGroup(2, 2.5) 
 			: initSunGroup(4, 5);
 		scene.add(sunGroup);
 
 		// create all the planets
-		const planets = getPlanets(isMobileRef.current ? 0.5 : 1);
+		const planets = getPlanets(isMobile ? 0.5 : 1);
 		const interactableObjects: THREE.Object3D[] = [];
 		for (const planet of planets) {
 			scene.add(planet.planetGroup);
@@ -178,7 +170,7 @@ export default function SolarSystem({
 			renderer.domElement.removeEventListener("mousemove", onMouseMove);
 			renderer.domElement.removeEventListener("click", handleMouseClick);
 		};
-	}, [router, dimensions.width, dimensions.height]);
+	}, [router, dimensions.width, dimensions.height, isMobile]);
 
 	return (
 		<div

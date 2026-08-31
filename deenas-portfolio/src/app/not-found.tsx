@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 export default function NotFound() {
 	return (
 		<div className="flex flex-1 items-center justify-center text-center">
-			<p>404 | page ∉ Deena's portfolio</p>
+			<p>404 | page ∉ Deena&apos;s portfolio</p>
 		</div>
 	);
 }
